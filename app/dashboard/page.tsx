@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
@@ -119,11 +119,11 @@ const SearchComponent = () => {
           placeholder="Search mitzvot..."
           className="flex-1 border p-2 rounded"
         />
-        <motion.div whileHover={{ scale: 1.2 }} onHoverStart={event => {}} onHoverEnd={event => {}}>
+        {/* <motion.div whileHover={{ scale: 1.2 }} onHoverStart={event => {}} onHoverEnd={event => {}}>
           <button type="submit" className="bg-blue-500 text-white p-2 rounded">
             Search
           </button>
-        </motion.div>
+        </motion.div> */}
       </form>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <div className="bg-gray-50 p-4 rounded-lg shadow-inner">
@@ -133,11 +133,11 @@ const SearchComponent = () => {
               <div className="flex-1">
                 <strong>{mitzvah.number})</strong> {mitzvah.description} -- <em>{mitzvah.source}</em>
               </div>
-              <motion.div whileHover={{ scale: 1.2 }} onHoverStart={event => {}} onHoverEnd={event => {}}>
+              {/* <motion.div whileHover={{ scale: 1.2 }} onHoverStart={event => {}} onHoverEnd={event => {}}>
                 <button className="bg-gray-500 text-white p-1 rounded ml-4 w-6 h-6 flex items-center justify-center">
                   <FontAwesomeIcon icon={faPlus} />
                 </button>
-              </motion.div>
+              </motion.div> */}
             </li>
           ))}
         </ul>
@@ -150,10 +150,9 @@ const Dashboard = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState('search');
   const [randomMitzvah, setRandomMitzvah] = useState(null);
-  const [error, setError] = useState('');
+
 
   const fetchRandomMitzvah = async () => {
-    setError('');
     try {
       const response = await fetch('https://web-production-aae7.up.railway.app/api/mitzvot/random');
       if (!response.ok) {
@@ -161,8 +160,8 @@ const Dashboard = () => {
       }
       const data = await response.json();
       setRandomMitzvah(data);
-    } catch (err) {
-      setError(err.message);
+    } catch (e) {
+      console.log(e);
     }
   };
 
